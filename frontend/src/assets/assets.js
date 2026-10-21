@@ -1,3 +1,4 @@
+
 import bell_icon from './bell.png'
 import home_icon from './home.png'
 import like_icon from './like.png'
@@ -20,8 +21,9 @@ import queue_icon from './queue.png'
 import volume_icon from './volume.png'
 import arrow_right from './right_arrow.png'
 import arrow_left from './left_arrow.png'
-import tuneflow from './tuneflow.png'
+import manara from './manara.png'
 import clock_icon from './clock_icon.png'
+
 import img1 from './img1.jpg'
 import img2 from './img2.jpg'
 import img3 from './img3.jpg'
@@ -38,9 +40,16 @@ import img13 from './img13.jpg'
 import img14 from './img14.jpg'
 import img15 from './img15.jpg'
 import img16 from './img16.jpg'
-import song1 from  './song1.mp3'
-import song2 from  './song2.mp3'
-import song3 from  './song3.mp3'
+
+// New Islamic collection images
+import tafseer from './tafseer.jpg'
+import our_prophet from './our-prophet.jpg'
+import sahaba_sahabiyat from './sahaba-sahabiyat.jpg'
+import namaz from './namaz.jpg'
+
+import song1 from './song1.mp3'
+import song2 from './song2.mp3'
+import song3 from './song3.mp3'
 
 export const assets = {
     bell_icon,
@@ -65,118 +74,105 @@ export const assets = {
     pause_icon,
     arrow_left,
     arrow_right,
-    tuneflow,
+    manara,
     clock_icon
 }
 
 export const albumsData = [
-    {   
-        id:0,
-        name: "Top 50 Global",
-        image: img8,
-        desc:"Your weekly update of the most played tracks",
-        bgColor:"#2a4365"
+
+    {
+        id: 0,
+        name: "Quran Tafseer by Dr. Israr Ahmed",
+        image: tafseer,
+        desc: "Explore the Quran through the tafseer lectures of Dr. Israr Ahmed.",
+        bgColor: "#234e52"
     },
-    {   
-        id:1,
-        name: "Top 50 India",
-        image: img9,
-        desc:"Your weekly update of the most played tracks",
-        bgColor:"#22543d"
+    {
+        id: 1,
+        name: "Our Prophet ﷺ",
+        image: our_prophet,
+        desc: "Learn about the life, teachings, and character of Prophet Muhammad ﷺ.",
+        bgColor: "#44337a"
     },
-    {   
-        id:2,
-        name: "Trending India",
-        image: img10,
-        desc:"Your weekly update of the most played tracks",
-        bgColor:"#742a2a"
+    {
+        id: 2,
+        name: "Our Sahaba and Sahabiyat",
+        image: sahaba_sahabiyat,
+        desc: "Discover the lives, sacrifices, and lessons of the companions of the Prophet ﷺ.",
+        bgColor: "#22543d"
     },
-    {   
-        id:3,
-        name: "Trending Global",
-        image: img16,
-        desc:"Your weekly update of the most played tracks",
-        bgColor:"#44337a"
-    },
-    {   
-        id:4,
-        name: "Mega Hits",
-        image: img11,
-        desc:"Your weekly update of the most played tracks",
-        bgColor:"#234e52"
-    },
-    {   
-        id:5,
-        name: "Happy Favorites",
-        image: img15,
-        desc:"Your weekly update of the most played tracks",
-        bgColor:"#744210"
+    {
+        id: 3,
+        name: "Namaz",
+        image: namaz,
+        desc: "Learn about Salah, its importance, preparation, and how to offer your prayers.",
+        bgColor: "#2a4365"
     }
 ]
 
 export const songsData = [
     {
-        id:0,
+        id: 0,
         name: "Song One",
         image: img1,
-        file:song1,
-        desc:"Put a smile on your face with these happy tunes",
-        duration:"3:00"
+        file: song1,
+        desc: "Put a smile on your face with these happy tunes",
+        duration: "3:00"
     },
     {
-        id:1,
+        id: 1,
         name: "Song Two",
         image: img2,
-        file:song2,
-        desc:"Put a smile on your face with these happy tunes",
-        duration:"2:20"
+        file: song2,
+        desc: "Put a smile on your face with these happy tunes",
+        duration: "2:20"
     },
     {
-        id:2,
+        id: 2,
         name: "Song Three",
         image: img3,
-        file:song3,
-        desc:"Put a smile on your face with these happy tunes",
-        duration:"2:32"
+        file: song3,
+        desc: "Put a smile on your face with these happy tunes",
+        duration: "2:32"
     },
     {
-        id:3,
+        id: 3,
         name: "Song Four",
         image: img4,
-        file:song1,
-        desc:"Put a smile on your face with these happy tunes",
-        duration:"2:50"
+        file: song1,
+        desc: "Put a smile on your face with these happy tunes",
+        duration: "2:50"
     },
     {
-        id:4,
+        id: 4,
         name: "Song Five",
         image: img5,
-        file:song2,
-        desc:"Put a smile on your face with these happy tunes",
-        duration:"3:10"
+        file: song2,
+        desc: "Put a smile on your face with these happy tunes",
+        duration: "3:10"
     },
     {
-        id:5,
+        id: 5,
         name: "Song Six",
-        image: img14    ,
-        file:song3,
-        desc:"Put a smile on your face with these happy tunes",
-        duration:"2:45"
+        image: img14,
+        file: song3,
+        desc: "Put a smile on your face with these happy tunes",
+        duration: "2:45"
     },
     {
-        id:6,
+        id: 6,
         name: "Song Seven",
         image: img7,
-        file:song1,
-        desc:"Put a smile on your face with these happy tunes",
-        duration:"2:18"
+        file: song1,
+        desc: "Put a smile on your face with these happy tunes",
+        duration: "2:18"
     },
     {
-        id:7,
+        id: 7,
         name: "Song Eight",
         image: img12,
-        file:song2,
-        desc:"Put a smile on your face with these happy tunes",
-        duration:"2:35"
+        file: song2,
+        desc: "Put a smile on your face with these happy tunes",
+        duration: "2:35"
     }
 ]

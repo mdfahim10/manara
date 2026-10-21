@@ -3,41 +3,148 @@ import { assets } from '../assets/assets'
 import { useNavigate } from 'react-router-dom'
 
 const Navbar = () => {
+    const navigate = useNavigate()
 
-  const navigate = useNavigate()
-  return (
-    <>
-      <div className="w-full flex justify-between items-center font-semibold">
-        <div className="flex items-center gap-2">
-          <img
-            onClick={() => navigate(-1)}
-            className="w-8 bg-black p-2 rounded-2xl cursor-pointer"
-            src={assets.arrow_left}
-            alt=""
-          />
+    return (
+        <header
+            className="
+                sticky top-0 z-20
+                flex items-center justify-between
+                gap-3
+                py-4 mb-6
+                bg-[#071510]/95
+                backdrop-blur-xl
+                border-b border-[#d6ad55]/15
+            "
+        >
+            {/* Left: Logo and navigation */}
+            <div className="flex items-center gap-2 shrink-0">
 
-          <img
-            onClick={() => navigate(+1)}
-            className="w-8 bg-black p-2 rounded-2xl cursor-pointer"
-            src={assets.arrow_right}
-            alt=""
-          />
-        </div>
+                {/* Manara Logo */}
+                <button
+                    onClick={() => navigate('/')}
+                    className="flex items-center mr-1"
+                    aria-label="Manara Home"
+                >
+                    <img
+                        src={assets.manara}
+                        alt="Manara"
+                        className="h-10 w-auto object-contain"
+                    />
+                </button>
 
-        <div className='flex items-center gap-4'>
-          <p className='bg-white text-black text-[15px] px-4 py-1 rounded-2xl hidden md:block'>Explore Premium</p>
-          <p className='bg-black y-1 px-3 rounded-2xl text-[15px] cursor-pointer'>Install App</p>
-          <p className='bg-purple-500 text-black w-7 h-7 rounded-full flex items-center justify-center'>A</p>
-        </div>
-      </div>
+                {/* Back */}
+                <button
+                    onClick={() => navigate(-1)}
+                    className="
+                        w-8 h-8 sm:w-9 sm:h-9
+                        rounded-xl
+                        bg-[#10271c]
+                        border border-[#d6ad55]/15
+                        flex items-center justify-center
+                        hover:bg-[#1a3828]
+                        hover:border-[#d6ad55]/40
+                        transition
+                    "
+                    aria-label="Go back"
+                >
+                    <img
+                        className="w-4"
+                        src={assets.arrow_left}
+                        alt=""
+                    />
+                </button>
 
-      <div className='flex items-center gap-2 mt-4'>
-        <p className='bg-white text-black px-4 py-1 rounded-2xl cursor-pointer'>ALL</p>
-        <p className='bg-black px-4 py-1 rounded-2xl cursor-pointer'>Music</p>
-        <p className='bg-black px-4 py-1 rounded-2xl cursor-pointer'>Podcast</p>
-      </div>
-    </>
-  )
+                {/* Forward */}
+                <button
+                    onClick={() => navigate(1)}
+                    className="
+                        w-8 h-8 sm:w-9 sm:h-9
+                        rounded-xl
+                        bg-[#10271c]
+                        border border-[#d6ad55]/15
+                        flex items-center justify-center
+                        hover:bg-[#1a3828]
+                        hover:border-[#d6ad55]/40
+                        transition
+                    "
+                    aria-label="Go forward"
+                >
+                    <img
+                        className="w-4"
+                        src={assets.arrow_right}
+                        alt=""
+                    />
+                </button>
+            </div>
+
+            {/* Search */}
+            <div
+                className="
+                    flex flex-1 min-w-0
+                    items-center gap-2 sm:gap-3
+                    max-w-[420px]
+                    px-3 sm:px-4
+                    py-2.5
+                    rounded-xl
+                    bg-[#102019]
+                    border border-[#d6ad55]/15
+                    focus-within:border-[#d6ad55]/50
+                    focus-within:shadow-[0_0_20px_rgba(214,173,85,0.08)]
+                    transition
+            "
+            >
+                <img
+                    src={assets.search_icon}
+                    className="w-4 opacity-60 shrink-0"
+                    alt=""
+                />
+
+                <input
+                    type="text"
+                    placeholder="Search Manara"
+                    className="
+                        bg-transparent outline-none
+                        text-sm text-[#f6f0df]
+                        placeholder:text-[#8a9b8d]
+                        w-full min-w-0
+                    "
+                />
+
+                {/* Keyboard shortcut */}
+                <span
+                    className="
+                        hidden lg:block
+                        text-[10px] text-[#a9a17e]
+                        border border-[#d6ad55]/20
+                        rounded px-2 py-1
+                    "
+                >
+                    /
+                </span>
+            </div>
+
+            {/* Right: Profile */}
+            <div className="flex items-center shrink-0">
+                <div
+                    className="
+                        w-8 h-8 sm:w-9 sm:h-9
+                        rounded-xl
+                        bg-gradient-to-br
+                        from-[#d6ad55]
+                        via-[#b98b32]
+                        to-[#76531c]
+                        flex items-center justify-center
+                        text-sm font-bold text-[#071510]
+                        border border-[#f5d98a]/30
+                        shadow-[0_0_20px_rgba(214,173,85,0.12)]
+                    "
+                >
+                    A
+                </div>
+            </div>
+        </header>
+    )
 }
 
 export default Navbar

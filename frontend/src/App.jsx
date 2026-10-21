@@ -1,23 +1,27 @@
+
 import React, { useContext } from 'react'
-import Sidebar from './components/Sidebar'
 import Player from './components/Player'
 import Display from './components/Display'
 import { PlayerContext } from './context/PlayerContext'
 
 const App = () => {
+    const { audioRef, track } = useContext(PlayerContext)
 
-  const { audioRef, track } = useContext(PlayerContext)
-  return (
-    <div className="h-screen bg-black">
-      <div className="h-[90%] flex">
-        <Sidebar />
-        <Display />
-      </div>
+    return (
+        <div className="min-h-screen bg-[#05070b] text-white">
+            <main className="min-h-screen pb-28">
+                <Display />
+            </main>
 
-      <Player />
-      <audio ref={audioRef} src={track.file} preload='auto'></audio>
-    </div>
-  )
+            <Player />
+
+            <audio
+                ref={audioRef}
+                src={track?.file}
+                preload="auto"
+            />
+        </div>
+    )
 }
 
 export default App

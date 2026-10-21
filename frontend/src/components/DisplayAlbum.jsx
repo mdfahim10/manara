@@ -1,57 +1,250 @@
-import React from 'react'
-import { useContext } from 'react'
+import React, { useContext } from 'react'
 import Navbar from './Navbar'
 import { useParams } from 'react-router-dom'
-import { albumsData, assets, songsData } from '../assets/assets';
+import { albumsData, assets, songsData } from '../assets/assets'
 import { PlayerContext } from '../context/PlayerContext'
 
 const DisplayAlbum = () => {
 
-  const { id } = useParams();
-  const albumData = albumsData[id];
+    const { id } = useParams()
 
-  const { playWithId } = useContext(PlayerContext)
+    const albumData = albumsData[Number(id)]
 
-  return (
-    <>
-      <Navbar />
-      <div className='mt-10 flex gap-8 flex-col md:flex-row md:items-end'>
-        <img className='w-48 rounded' src={albumData.image} alt='' />
-        <div className='flex flex-col '>
-          <p>Playlist</p>
-          <h2 className='text-5xl font-bold mb-4 md:text-7xl'>{albumData.name}</h2>
-          <h4>{albumData.desc}</h4>
-          <p className='mt-1'>
-            <img className='inline-block w-30' src={assets.tuneflow} alt='' />
-            •1,234,322 likes
-            •<b>50 songs,</b>
-            about 2 hr 30 min
-          </p>
-        </div>
-      </div>
-      <div className='grid grid-cols-3 sm:grid-cols-4 mt-10 mb-4 pl-2 text-[#a7a7a7'>
-        <p><b className='mr-4'>#</b>Title</p>
-        <p>Album</p>
-        <p className='hidden sm:block'>Date added</p>
-        <img className='m-auto w-4' src={assets.clock_icon} alt='' />
-      </div>
-      <hr />
-      {
-        songsData.map((item, index) => (
-          <div onClick={() => playWithId(item.id)} key={index} className='grid grid-cols-3 sm:grid-cols-4 gap-2 p-2 items-center text-[#a7a7a7 hover:bg-[#ffffff2b] cursor-pointer'>
-            <p className='text-white'>
-              <b className='mr-4 text-[#a7a7a7]'>{index + 1}</b>
-              <img className='inline w-10 mr-5' src={item.image} alt='' />
-              {item.name}
-            </p>
-            <p className='text-[15px]'>{albumData.name}</p>
-            <p className='text-[15px] hidden sm:block'>5 days ago</p>
-            <p className='text-[15px] text-center'>{item.duration}</p>
-          </div>
-        ))
-      }
-    </>
-  )
+    const { playWithId } = useContext(PlayerContext)
+
+    if (!albumData) {
+        return (
+            <div className="pt-20 text-center">
+                <h2 className="text-2xl font-bold">
+                    Album not found
+                </h2>
+            </div>
+        )
+    }
+
+    return (
+        <>
+            <Navbar />
+
+            <section className="
+                relative
+                overflow-hidden
+                rounded-3xl
+                p-6 md:p-10
+                bg-gradient-to-br
+                from-white/[0.05]
+                to-transparent
+                border border-white/[0.07]
+            ">
+
+                <div
+                    className="absolute inset-0 opacity-20"
+                    style={{
+                        background: `radial-gradient(
+                            circle at 20% 20%,
+                            ${albumData.bgColor},
+                            transparent 45%
+                        )`
+                    }}
+                />
+
+                <div className="
+                    relative
+                    flex
+                    flex-col
+                    md:flex-row
+                    gap-7
+                    md:items-end
+                ">
+
+                    <img
+                        className="
+                            w-44 h-44
+                            md:w-56 md:h-56
+                            object-cover
+                            rounded-2xl
+                            shadow-2xl
+                        "
+                        src={albumData.image}
+                        alt={albumData.name}
+                    />
+
+                    <div>
+
+                        <p className="
+                            text-xs
+                            uppercase
+                            tracking-[0.25em]
+                            text-cyan-300
+                            mb-3
+                        ">
+                            TuneFlow Collection
+                        </p>
+
+                        <h1 className="
+                            text-4xl
+                            md:text-6xl
+                            font-bold
+                            tracking-tight
+                        ">
+                            {albumData.name}
+                        </h1>
+
+                        <p className="
+                            text-slate-400
+                            mt-4
+                            max-w-xl
+                        ">
+                            {albumData.desc}
+                        </p>
+
+                        <div className="
+                            flex items-center
+                            gap-3
+                            mt-5
+                            text-xs
+                            text-slate-500
+                        ">
+
+                            <img
+                                src={assets.tuneflow}
+                                className="w-20 h-auto"
+                                alt="TuneFlow"
+                            />
+
+                            <span>•</span>
+                            <span>Curated collection</span>
+                            <span>•</span>
+                            <span>{songsData.length} tracks</span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <section className="mt-8">
+
+                <div className="
+                    grid
+                    grid-cols-[40px_1fr_80px]
+                    md:grid-cols-[50px_1fr_180px_80px]
+                    px-4
+                    pb-3
+                    border-b border-white/[0.06]
+                    text-[10px]
+                    uppercase
+                    tracking-[0.15em]
+                    text-slate-600
+                ">
+
+                    <span>#</span>
+                    <span>Track</span>
+                    <span className="hidden md:block">
+                        Collection
+                    </span>
+                    <span className="text-right">
+                        Time
+                    </span>
+
+                </div>
+
+                <div className="mt-2">
+
+                    {songsData.map((item, index) => (
+
+                        <div
+                            key={item.id}
+                            onClick={() => playWithId(item.id)}
+                            className="
+                                group
+                                grid
+                                grid-cols-[40px_1fr_80px]
+                                md:grid-cols-[50px_1fr_180px_80px]
+                                items-center
+                                px-4 py-3
+                                rounded-xl
+                                cursor-pointer
+                                hover:bg-white/[0.05]
+                                transition
+                            "
+                        >
+
+                            <span className="
+                                text-sm
+                                text-slate-600
+                                group-hover:text-cyan-300
+                            ">
+                                {String(index + 1).padStart(2, "0")}
+                            </span>
+
+                            <div className="
+                                flex items-center
+                                gap-3
+                                min-w-0
+                            ">
+
+                                <img
+                                    src={item.image}
+                                    className="
+                                        w-11 h-11
+                                        rounded-lg
+                                        object-cover
+                                    "
+                                    alt={item.name}
+                                />
+
+                                <div className="min-w-0">
+
+                                    <p className="
+                                        text-sm
+                                        font-semibold
+                                        truncate
+                                    ">
+                                        {item.name}
+                                    </p>
+
+                                    <p className="
+                                        text-xs
+                                        text-slate-600
+                                        truncate
+                                        mt-1
+                                    ">
+                                        {item.desc}
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                            <span className="
+                                hidden md:block
+                                text-xs
+                                text-slate-600
+                            ">
+                                {albumData.name}
+                            </span>
+
+                            <span className="
+                                text-right
+                                text-xs
+                                text-slate-500
+                            ">
+                                {item.duration}
+                            </span>
+
+                        </div>
+
+                    ))}
+
+                </div>
+
+            </section>
+
+        </>
+    )
 }
 
 export default DisplayAlbum

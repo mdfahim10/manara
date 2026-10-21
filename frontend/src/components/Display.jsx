@@ -6,29 +6,89 @@ import { albumsData } from '../assets/assets'
 
 const Display = () => {
 
-  const displayRef = useRef();
-  const location = useLocation();
-  const isAlbum = location.pathname.includes("album");
-  const albumId = isAlbum ? location.pathname.slice(-1) : "";
-  const bgColor = albumsData[Number(albumId)].bgColor
+    const displayRef = useRef(null)
+    const location = useLocation()
 
-  useEffect(() => {
-    if (isAlbum) {
-      displayRef.current.style.background = `linear-gradient(${bgColor},#121212)`
-    }
-    else {
-      displayRef.current.style.background = `#121212`
-    }
-  })
+    const isAlbum = location.pathname.includes("/album/")
 
-  return (
-    <div ref={displayRef} className="w-[100%] m-2 px-6 pt-4 rounded bg-[#121212] text-white overflow-auto lg:w-[75%] lg:ml-0">
-      <Routes>
-        <Route path="/" element={<DisplayHome />} />
-        <Route path="/album/:id" element={<DisplayAlbum />} />
-      </Routes>
-    </div>
-  )
+    const albumId = isAlbum
+        ? location.pathname.split("/").pop()
+        : null
+
+    const albumData =
+        albumId !== null
+            ? albumsData[Number(albumId)]
+            : null
+
+    useEffect(() => {
+
+        if (isAlbum && albumData) {
+
+            displayRef.current.style.background = `
+                radial-gradient(
+                    circle at 75% 0%,
+                    ${albumData.bgColor}55,
+                    transparent 35%
+                ),
+                linear-gradient(
+                    135deg,
+                    #0a111a,
+                    #070a10 60%,
+                    #05070b
+                )
+            `
+
+        } else {
+
+            displayRef.current.style.background = `
+                radial-gradient(
+                    circle at 80% 0%,
+                    rgba(0, 190, 255, 0.08),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 20% 30%,
+                    rgba(65, 255, 130, 0.04),
+                    transparent 30%
+                ),
+                #070a10
+            `
+        }
+
+    }, [isAlbum, albumData])
+
+    return (
+        <div
+            ref={displayRef}
+            className="
+                w-full
+                min-h-screen
+                px-5
+                md:px-8
+                pb-10
+                text-white
+                overflow-auto
+                transition-all
+                duration-500
+            "
+        >
+
+            <Routes>
+
+                <Route
+                    path="/"
+                    element={<DisplayHome />}
+                />
+
+                <Route
+                    path="/album/:id"
+                    element={<DisplayAlbum />}
+                />
+
+            </Routes>
+
+        </div>
+    )
 }
 
 export default Display

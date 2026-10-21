@@ -1,4 +1,3 @@
-
 import { createContext, useEffect, useRef, useState } from "react";
 import { songsData } from "../assets/assets";
 
@@ -25,17 +24,24 @@ const PlayerContextProvider = (props) => {
     });
 
     const play = () => {
-        if (audioRef.current) {
-            audioRef.current.play();
-            setPlayStatus(true);
-        }
+
+        if (!audioRef.current) return;
+
+        audioRef.current.play()
+            .then(() => {
+                setPlayStatus(true);
+            })
+            .catch((error) => {
+                console.log("Playback prevented:", error);
+            });
     };
 
     const pause = () => {
-        if (audioRef.current) {
-            audioRef.current.pause();
-            setPlayStatus(false);
-        }
+
+        if (!audioRef.current) return;
+
+        audioRef.current.pause();
+        setPlayStatus(false);
     };
 
     const playWithId = (id) => {
@@ -48,26 +54,35 @@ const PlayerContextProvider = (props) => {
         setTrack(songsData[id]);
     };
 
-    const previous = async () => {
-        if(track.id>0){
-            await setTrack(songsData[track.id-1]);
-            await audioRef.current.play();
-            setPlayStatus(true);
+    const previous = () => {
+
+        if (track.id > 0) {
+            setTrack(songsData[track.id - 1]);
         }
-    }
+    };
 
-    const next = async () => {
-        if(track.id<songsData.length-1){
-            await setTrack(songsData[track.id+1]);
-            await audioRef.current.play();
-            setPlayStatus(true);
+    const next = () => {
+
+        if (track.id < songsData.length - 1) {
+            setTrack(songsData[track.id + 1]);
         }
-    }
+    };
 
-    const seekSong = async (e) => {
-        audioRef.current.currentTime = ((e.nativeEvent.offsetX/seekBg.current.offsetWidth)*audioRef.current.duration)
-    }
+    const seekSong = (e) => {
 
+        if (!audioRef.current || !seekBg.current) return;
+
+        const width = seekBg.current.offsetWidth;
+
+        const clickPosition = e.nativeEvent.offsetX;
+
+        const duration = audioRef.current.duration;
+
+        if (!duration) return;
+
+        audioRef.current.currentTime =
+            (clickPosition / width) * duration;
+    };
 
     useEffect(() => {
 
@@ -77,12 +92,14 @@ const PlayerContextProvider = (props) => {
 
         const updateTime = () => {
 
-            if (!audio.duration || !seekBar.current) return;
+            if (!audio.duration) return;
 
-            seekBar.current.style.width =
-                (Math.floor(
-                    (audio.currentTime / audio.duration) * 100
-                )) + "%";
+            const progress =
+                (audio.currentTime / audio.duration) * 100;
+
+            if (seekBar.current) {
+                seekBar.current.style.width = `${progress}%`;
+            }
 
             setTime({
                 currentTime: {
@@ -109,13 +126,15 @@ const PlayerContextProvider = (props) => {
 
         if (!audioRef.current || !track) return;
 
+        audioRef.current.load();
+
         audioRef.current
             .play()
             .then(() => {
                 setPlayStatus(true);
             })
-            .catch((error) => {
-                console.log("Playback prevented:", error);
+            .catch(() => {
+                setPlayStatus(false);
             });
 
     }, [track]);
@@ -138,7 +157,8 @@ const PlayerContextProvider = (props) => {
         pause,
         playWithId,
 
-        previous,next,
+        previous,
+        next,
 
         seekSong
     };
