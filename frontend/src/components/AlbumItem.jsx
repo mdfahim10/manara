@@ -21,9 +21,7 @@ const AlbumItem = ({ image, name, desc, id }) => {
                 hover:-translate-y-1
             "
         >
-
             <div className="relative aspect-square overflow-hidden">
-
                 <img
                     className="
                         w-full
@@ -36,7 +34,6 @@ const AlbumItem = ({ image, name, desc, id }) => {
                     src={image}
                     alt={name}
                 />
-
                 <div className="
                     absolute inset-0
                     bg-gradient-to-t
@@ -44,7 +41,6 @@ const AlbumItem = ({ image, name, desc, id }) => {
                     via-transparent
                     to-transparent
                 " />
-
                 <div className="
                     absolute
                     bottom-3
@@ -63,15 +59,11 @@ const AlbumItem = ({ image, name, desc, id }) => {
                 ">
                     ▶
                 </div>
-
             </div>
-
             <div className="p-4">
-
                 <p className="font-semibold truncate">
                     {name}
                 </p>
-
                 <p className="
                     text-xs
                     text-slate-500
@@ -81,11 +73,8 @@ const AlbumItem = ({ image, name, desc, id }) => {
                 ">
                     {desc}
                 </p>
-
             </div>
-
         </div>
     )
 }
-
 export default AlbumItem
